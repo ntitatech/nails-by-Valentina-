@@ -1,0 +1,751 @@
+```html
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nails By Valentina | Certified Nail Tech Cape Town</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            100: '#FFF9E6',
+                            200: '#FDF0C3',
+                            300: '#FCE496',
+                            400: '#F5CE58',
+                            500: '#D4AF37', // Primary Luxury Gold
+                            600: '#AA8821',
+                            700: '#806313',
+                            800: '#554009',
+                            900: '#2B1F02',
+                        },
+                        dark: {
+                            base: '#0B0D11',
+                            surface: '#12161F',
+                            card: '#1A1E29',
+                        }
+                    },
+                    fontFamily: {
+                        cinzel: ['"Cinzel Decorative"', 'serif'],
+                        playfair: ['"Playfair Display"', 'serif'],
+                        sans: ['"Montserrat"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar & Luxury Glassmorphism Utilities */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0D11;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #332912;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D4AF37;
+        }
+
+        /* Glassmorphism Classes */
+        .glass-panel {
+            background: rgba(22, 26, 36, 0.55);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.18);
+        }
+
+        .glass-panel-gold {
+            background: rgba(212, 175, 55, 0.08);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+        }
+
+        .glass-nav {
+            background: rgba(11, 13, 17, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+        }
+
+        .glass-modal {
+            background: rgba(15, 18, 25, 0.88);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        /* Metallic Gold Gradient Text */
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #FFF0BD 0%, #D4AF37 50%, #8A6D1B 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Gold Shimmer Button Effect */
+        .btn-gold-glow {
+            background: linear-gradient(135deg, #EAD07B 0%, #D4AF37 50%, #A37F19 100%);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-gold-glow:hover {
+            box-shadow: 0 0 32px rgba(212, 175, 55, 0.6);
+            transform: translateY(-2px);
+        }
+
+        /* Gold Dotted Leader Line for Prices */
+        .dotted-leader {
+            flex-grow: 1;
+            border-bottom: 2px dotted rgba(212, 175, 55, 0.35);
+            margin: 0 12px;
+            position: relative;
+            top: -5px;
+        }
+
+        /* Custom Input styling for dark theme */
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1) sepia(100%) saturate(1000%) hue-rotate(10deg);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="bg-dark-base text-gray-200 font-sans selection:bg-gold-500 selection:text-black overflow-x-hidden">
+
+    <!-- Maintenance Mode Screen (Suspended State) -->
+    <div id="maintenanceScreen" class="hidden fixed inset-0 z-50 bg-dark-base flex items-center justify-center p-4">
+        <div class="max-w-md w-full glass-panel rounded-3xl p-8 sm:p-10 text-center border border-gold-500/30 relative overflow-hidden">
+            <div class="w-16 h-16 rounded-full glass-panel-gold flex items-center justify-center text-gold-500 text-2xl mx-auto mb-6">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+            </div>
+            <h1 class="font-cinzel text-2xl sm:text-3xl font-bold gold-gradient-text mb-3">SYSTEM MAINTENANCE</h1>
+            <p class="text-xs text-gray-300 leading-relaxed mb-6">
+                Our online booking system is currently undergoing scheduled maintenance to serve you better. We apologize for any inconvenience caused.
+            </p>
+            <div class="p-4 rounded-2xl glass-panel-gold text-xs text-gold-300 mb-6 flex items-center justify-center gap-2">
+                <i class="fa-brands fa-whatsapp text-base"></i>
+                <span>Direct WhatsApp Bookings: +27 71 451 2970</span>
+            </div>
+            <a href="https://wa.me/27714512970?text=Hi%20Valentina%2C%20I%20would%20like%20to%20book%20an%20appointment." target="_blank" class="block w-full btn-gold-glow text-black font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl">
+                Contact via WhatsApp
+            </a>
+            <button onclick="toggleMaintenanceMode(false)" class="mt-4 text-[10px] text-gray-500 hover:text-gray-400 underline">
+                Back to Site (Admin Preview)
+            </button>
+        </div>
+    </div>
+
+    <div id="mainSite">
+        <!-- Navigation Bar -->
+        <header class="fixed top-0 left-0 right-0 z-40 glass-nav transition-all duration-300">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+                <!-- Brand Logo -->
+                <a href="#" class="flex flex-col items-start group">
+                    <span class="font-cinzel text-lg sm:text-xl font-bold tracking-widest gold-gradient-text group-hover:scale-105 transition-transform duration-300">
+                        NAILS <span class="text-xs text-gold-500 mx-0.5">♥</span> BY <span class="text-xs text-gold-500 mx-0.5">♥</span> VALENTINA
+                    </span>
+                    <span class="text-[9px] uppercase tracking-[0.25em] text-gray-400 font-medium">Cape Town Studio</span>
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <nav class="hidden md:flex items-center space-x-8 font-medium text-xs tracking-widest uppercase">
+                    <a href="#home" class="hover:text-gold-500 transition-colors duration-200">Home</a>
+                    <a href="#services" class="hover:text-gold-500 transition-colors duration-200">Services & Prices</a>
+                    <a href="#gallery" class="hover:text-gold-500 transition-colors duration-200">Gallery</a>
+                    <a href="#location" class="hover:text-gold-500 transition-colors duration-200">Location</a>
+                </nav>
+
+                <!-- Book CTA Button -->
+                <div class="hidden md:block">
+                    <button onclick="openBookingModal()" class="btn-gold-glow text-black font-semibold text-xs uppercase tracking-wider px-6 py-2.5 rounded-full flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-sm"></i>
+                        <span>Book Now</span>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Toggle Button -->
+                <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="md:hidden text-gold-500 p-2 text-xl focus:outline-none" aria-label="Toggle Navigation">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Navigation Menu Dropdown -->
+            <div id="mobileMenu" class="hidden md:hidden glass-panel border-t border-gold-500/20 px-6 py-6 space-y-4 font-medium text-sm uppercase tracking-widest text-center">
+                <a href="#home" onclick="toggleMobileMenu()" class="block py-2 hover:text-gold-500">Home</a>
+                <a href="#services" onclick="toggleMobileMenu()" class="block py-2 hover:text-gold-500">Services & Prices</a>
+                <a href="#gallery" onclick="toggleMobileMenu()" class="block py-2 hover:text-gold-500">Gallery</a>
+                <a href="#location" onclick="toggleMobileMenu()" class="block py-2 hover:text-gold-500">Location</a>
+                <button onclick="toggleMobileMenu(); openBookingModal()" class="w-full btn-gold-glow text-black font-semibold text-xs uppercase tracking-wider py-3 rounded-full mt-4">
+                    Book Appointment
+                </button>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section id="home" class="relative min-h-screen pt-28 pb-16 flex items-center justify-center overflow-hidden">
+            <!-- Ambient Luxury Background Image + Blur Overlay -->
+            <div class="absolute inset-0 z-0">
+                <img src="https://i.postimg.cc/Gp00c6MW/unnamed-(5).webp" 
+                     alt="Luxury Nail Studio Cape Town" 
+                     class="w-full h-full object-cover object-center scale-105 filter brightness-[0.3] contrast-125"
+                     onerror="this.src='https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=1920&q=80'">
+                <div class="absolute inset-0 bg-gradient-to-t from-dark-base via-dark-base/60 to-transparent"></div>
+                <div class="absolute inset-0 bg-radial-at-c from-gold-500/10 via-transparent to-transparent"></div>
+            </div>
+
+            <!-- Hero Content Card -->
+            <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
+                <!-- Badge -->
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel-gold border border-gold-500/40 mb-6">
+                    <i class="fa-solid fa-gem text-gold-500 text-xs"></i>
+                    <span class="text-xs uppercase tracking-[0.2em] font-medium text-gold-300">Certified Nail Tech • Cape Town</span>
+                </div>
+
+                <!-- Main Heading -->
+                <h1 class="font-cinzel text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-white mb-6 leading-tight">
+                    ELEGANCE IN EVERY <br class="hidden sm:inline">
+                    <span class="gold-gradient-text font-playfair italic font-normal">Single Detail</span>
+                </h1>
+
+                <p class="font-playfair italic text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+                    "I can't wait to pamper you!"
+                </p>
+
+                <!-- Hero Action Buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <button onclick="openBookingModal()" class="w-full sm:w-auto btn-gold-glow text-black font-bold text-sm uppercase tracking-widest px-8 py-4 rounded-full flex items-center justify-center gap-3 group">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span>Book Appointment</span>
+                        <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                    <a href="#services" class="w-full sm:w-auto glass-panel text-gold-300 hover:text-white font-semibold text-sm uppercase tracking-widest px-8 py-4 rounded-full border border-gold-500/30 hover:border-gold-500 transition-all text-center">
+                        View Price List
+                    </a>
+                </div>
+
+                <!-- Key Trust Badges -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-16 pt-10 border-t border-gold-500/15 max-w-3xl mx-auto text-xs text-gray-300">
+                    <div class="flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-sparkles text-gold-500"></i>
+                        <span>Premium Quality</span>
+                    </div>
+                    <div class="flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-pump-soap text-gold-500"></i>
+                        <span>Clean & Sanitized</span>
+                    </div>
+                    <div class="flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-eye text-gold-500"></i>
+                        <span>Attention to Detail</span>
+                    </div>
+                    <div class="flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-shield-halved text-gold-500"></i>
+                        <span>Hygiene Focused</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services & Price List Section -->
+        <section id="services" class="py-24 relative z-10 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <div class="flex items-center justify-center gap-3 mb-2">
+                    <div class="h-px w-12 bg-gold-500/40"></div>
+                    <span class="text-xs font-semibold uppercase tracking-[0.3em] text-gold-500">Exclusive Services</span>
+                    <div class="h-px w-12 bg-gold-500/40"></div>
+                </div>
+                <h2 class="font-cinzel text-3xl sm:text-4xl font-bold gold-gradient-text tracking-wider">PRICE LIST</h2>
+                <p class="text-xs text-gray-400 tracking-widest uppercase mt-2">Appointments Only • Card Facilities Available</p>
+            </div>
+
+            <!-- Glassmorphic Price List Card -->
+            <div class="glass-panel rounded-3xl p-6 sm:p-10 md:p-12 border border-gold-500/20 shadow-2xl relative overflow-hidden">
+                <!-- Decorative Gold Accents -->
+                <div class="absolute -top-24 -right-24 w-48 h-48 bg-gold-500/10 rounded-full filter blur-3xl pointer-events-none"></div>
+                <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-gold-500/10 rounded-full filter blur-3xl pointer-events-none"></div>
+
+                <div class="space-y-6">
+                    
+                    <!-- Price Item 1 -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between group p-3 rounded-xl hover:bg-gold-500/5 transition-colors">
+                        <div class="flex-1 flex items-baseline">
+                            <span class="font-playfair text-lg sm:text-xl font-semibold text-white group-hover:text-gold-300 transition-colors">Classic Manicure (No Paint)</span>
+                            <span class="dotted-leader hidden sm:block"></span>
+                        </div>
+                        <div class="flex items-center justify-between sm:justify-end gap-4 mt-1 sm:mt-0">
+                            <span class="font-cinzel text-lg font-bold text-gold-500">R400</span>
+                            <button onclick="openBookingModal('Classic Manicure (No Paint) - R400')" class="px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider border border-gold-500/40 hover:bg-gold-500 hover:text-black transition-all">
+                                Book
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Price Item 2 -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between group p-3 rounded-xl hover:bg-gold-500/5 transition-colors">
+                        <div class="flex-1 flex items-baseline">
+                            <span class="font-playfair text-lg sm:text-xl font-semibold text-white group-hover:text-gold-300 transition-colors">Manicure (Builder Gel)</span>
+                            <span class="dotted-leader hidden sm:block"></span>
+                        </div>
+                        <div class="flex items-center justify-between sm:justify-end gap-4 mt-1 sm:mt-0">
+                            <span class="font-cinzel text-lg font-bold text-gold-500">R550</span>
+                            <button onclick="openBookingModal('Manicure (Builder Gel) - R550')" class="px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider border border-gold-500/40 hover:bg-gold-500 hover:text-black transition-all">
+                                Book
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Price Item 3 -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between group p-3 rounded-xl hover:bg-gold-500/5 transition-colors">
+                        <div class="flex-1 flex items-baseline">
+                            <span class="font-playfair text-lg sm:text-xl font-semibold text-white group-hover:text-gold-300 transition-colors">French Manicure</span>
+                            <span class="dotted-leader hidden sm:block"></span>
+                        </div>
+                        <div class="flex items-center justify-between sm:justify-end gap-4 mt-1 sm:mt-0">
+                            <span class="font-cinzel text-lg font-bold text-gold-500">R650</span>
+                            <button onclick="openBookingModal('French Manicure - R650')" class="px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider border border-gold-500/40 hover:bg-gold-500 hover:text-black transition-all">
+                                Book
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Price Item 4 -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between group p-3 rounded-xl hover:bg-gold-500/5 transition-colors">
+                        <div class="flex-1 flex items-baseline">
+                            <span class="font-playfair text-lg sm:text-xl font-semibold text-white group-hover:text-gold-300 transition-colors">Ombre Manicure</span>
+                            <span class="dotted-leader hidden sm:block"></span>
+                        </div>
+                        <div class="flex items-center justify-between sm:justify-end gap-4 mt-1 sm:mt-0">
+                            <span class="font-cinzel text-lg font-bold text-gold-500">R650</span>
+                            <button onclick="openBookingModal('Ombre Manicure - R650')" class="px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider border border-gold-500/40 hover:bg-gold-500 hover:text-black transition-all">
+                                Book
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Price Item 5 -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between group p-3 rounded-xl hover:bg-gold-500/5 transition-colors">
+                        <div class="flex-1 flex items-baseline">
+                            <span class="font-playfair text-lg sm:text-xl font-semibold text-white group-hover:text-gold-300 transition-colors">Classic Pedicure (No Paint)</span>
+                            <span class="dotted-leader hidden sm:block"></span>
+                        </div>
+                        <div class="flex items-center justify-between sm:justify-end gap-4 mt-1 sm:mt-0">
+                            <span class="font-cinzel text-lg font-bold text-gold-500">R400</span>
+                            <button onclick="openBookingModal('Classic Pedicure (No Paint) - R400')" class="px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider border border-gold-500/40 hover:bg-gold-500 hover:text-black transition-all">
+                                Book
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Heart Divider Accent -->
+                    <div class="flex items-center justify-center my-6">
+                        <div class="h-px w-24 bg-gold-500/30"></div>
+                        <span class="mx-4 text-xs text-gold-500">♥</span>
+                        <div class="h-px w-24 bg-gold-500/30"></div>
+                    </div>
+
+                    <!-- Price Item 6 -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between group p-3 rounded-xl hover:bg-gold-500/5 transition-colors">
+                        <div class="flex-1 flex items-baseline">
+                            <span class="font-playfair text-lg sm:text-xl font-semibold text-white group-hover:text-gold-300 transition-colors">Mini Pedi (Incl Paint)</span>
+                            <span class="dotted-leader hidden sm:block"></span>
+                        </div>
+                        <div class="flex items-center justify-between sm:justify-end gap-4 mt-1 sm:mt-0">
+                            <span class="font-cinzel text-lg font-bold text-gold-500">R550</span>
+                            <button onclick="openBookingModal('Mini Pedi (Incl Paint) - R550')" class="px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider border border-gold-500/40 hover:bg-gold-500 hover:text-black transition-all">
+                                Book
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Price Item 7 -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between group p-3 rounded-xl hover:bg-gold-500/5 transition-colors">
+                        <div class="flex-1 flex items-baseline">
+                            <span class="font-playfair text-lg sm:text-xl font-semibold text-white group-hover:text-gold-300 transition-colors">Full Pedi (Incl Paint)</span>
+                            <span class="dotted-leader hidden sm:block"></span>
+                        </div>
+                        <div class="flex items-center justify-between sm:justify-end gap-4 mt-1 sm:mt-0">
+                            <span class="font-cinzel text-lg font-bold text-gold-500">R650</span>
+                            <button onclick="openBookingModal('Full Pedi (Incl Paint) - R650')" class="px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider border border-gold-500/40 hover:bg-gold-500 hover:text-black transition-all">
+                                Book
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Price Item 8 -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between group p-3 rounded-xl hover:bg-gold-500/5 transition-colors">
+                        <div class="flex-1 flex items-baseline">
+                            <span class="font-playfair text-lg sm:text-xl font-semibold text-white group-hover:text-gold-300 transition-colors">Builder Gel / Polymer Ext</span>
+                            <span class="dotted-leader hidden sm:block"></span>
+                        </div>
+                        <div class="flex items-center justify-between sm:justify-end gap-4 mt-1 sm:mt-0">
+                            <span class="font-cinzel text-lg font-bold text-gold-500">R700</span>
+                            <button onclick="openBookingModal('Builder Gel / Polymer Ext - R700')" class="px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider border border-gold-500/40 hover:bg-gold-500 hover:text-black transition-all">
+                                Book
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Price Item 9 -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between group p-3 rounded-xl hover:bg-gold-500/5 transition-colors">
+                        <div class="flex-1 flex items-baseline">
+                            <span class="font-playfair text-lg sm:text-xl font-semibold text-white group-hover:text-gold-300 transition-colors">Nail Repair (Per Nail)</span>
+                            <span class="dotted-leader hidden sm:block"></span>
+                        </div>
+                        <div class="flex items-center justify-between sm:justify-end gap-4 mt-1 sm:mt-0">
+                            <span class="font-cinzel text-lg font-bold text-gold-500">R40</span>
+                            <button onclick="openBookingModal('Nail Repair (Per Nail) - R40')" class="px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider border border-gold-500/40 hover:bg-gold-500 hover:text-black transition-all">
+                                Book
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Price Item 10 -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between group p-3 rounded-xl hover:bg-gold-500/5 transition-colors">
+                        <div class="flex-1 flex items-baseline">
+                            <span class="font-playfair text-lg sm:text-xl font-semibold text-white group-hover:text-gold-300 transition-colors">Nail Art (Per Nail)</span>
+                            <span class="dotted-leader hidden sm:block"></span>
+                        </div>
+                        <div class="flex items-center justify-between sm:justify-end gap-4 mt-1 sm:mt-0">
+                            <span class="font-cinzel text-lg font-bold text-gold-500">R15</span>
+                            <button onclick="openBookingModal('Nail Art (Per Nail) - R15')" class="px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider border border-gold-500/40 hover:bg-gold-500 hover:text-black transition-all">
+                                Book
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Footer Message inside Price List -->
+                <div class="mt-12 text-center pt-8 border-t border-gold-500/20">
+                    <p class="font-playfair italic text-xl gold-gradient-text mb-2">Thank you for choosing me</p>
+                    <p class="text-xs tracking-widest text-gray-400 uppercase">E-file Manicure & Pedicure Specialist</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="py-20 bg-dark-surface/50 border-y border-gold-500/10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <span class="text-xs font-semibold uppercase tracking-[0.3em] text-gold-500">Portfolio</span>
+                    <h2 class="font-cinzel text-3xl sm:text-4xl font-bold text-white tracking-wider mt-1">STUDIO WORK</h2>
+                </div>
+
+                <!-- Image Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    
+                    <!-- Gallery Item 1 -->
+                    <div class="group relative rounded-2xl overflow-hidden glass-panel border border-gold-500/20 aspect-square cursor-pointer">
+                        <img src="https://i.postimg.cc/htXg4LK8/unnamed-(6).webp" 
+                             alt="Nail Art Design" 
+                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                             onerror="this.src='https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=600&q=80'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <span class="text-xs uppercase tracking-widest text-gold-400">French Tip Elegance</span>
+                            <span class="text-sm font-semibold text-white">Classic French Finish</span>
+                        </div>
+                    </div>
+
+                    <!-- Gallery Item 2 -->
+                    <div class="group relative rounded-2xl overflow-hidden glass-panel border border-gold-500/20 aspect-square cursor-pointer">
+                        <img src="https://i.postimg.cc/Gp00c6MW/unnamed-(5).webp" 
+                             alt="Nail Art Design" 
+                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                             onerror="this.src='https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&w=600&q=80'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <span class="text-xs uppercase tracking-widest text-gold-400">Builder Gel</span>
+                            <span class="text-sm font-semibold text-white">Soft Pink Nude</span>
+                        </div>
+                    </div>
+
+                    <!-- Gallery Item 3 -->
+                    <div class="group relative rounded-2xl overflow-hidden glass-panel border border-gold-500/20 aspect-square cursor-pointer">
+                        <img src="https://i.postimg.cc/2j0Pq1cW/unnamed-(4).webp" 
+                             alt="Nail Art Design" 
+                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                             onerror="this.src='https://images.unsplash.com/photo-1519014816548-bf5fe059798b?auto=format&fit=crop&w=600&q=80'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <span class="text-xs uppercase tracking-widest text-gold-400">Ombre Manicure</span>
+                            <span class="text-sm font-semibold text-white">Blush Ombre</span>
+                        </div>
+                    </div>
+
+                    <!-- Gallery Item 4 -->
+                    <div class="group relative rounded-2xl overflow-hidden glass-panel border border-gold-500/20 aspect-square cursor-pointer">
+                        <img src="https://i.postimg.cc/3wQ6MmNp/unnamed-(3).webp" 
+                             alt="Nail Art Design" 
+                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                             onerror="this.src='https://images.unsplash.com/photo-1607779097040-26e80aa78e66?auto=format&fit=crop&w=600&q=80'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <span class="text-xs uppercase tracking-widest text-gold-400">Custom Art</span>
+                            <span class="text-sm font-semibold text-white">Gold Foil Accents</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Location & Contact Section -->
+        <section id="location" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <!-- Contact Details Card -->
+                <div class="glass-panel p-8 sm:p-10 rounded-3xl border border-gold-500/20">
+                    <span class="text-xs font-semibold uppercase tracking-[0.3em] text-gold-500">Visit Studio</span>
+                    <h2 class="font-cinzel text-3xl font-bold text-white mb-6">CAPE TOWN STUDIO</h2>
+                    
+                    <p class="text-gray-300 text-sm leading-relaxed mb-8">
+                        Experience luxury nail care in a serene, sterile, and high-end studio atmosphere located in Kuils River, Cape Town.
+                    </p>
+
+                    <div class="space-y-6 text-sm">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full glass-panel-gold flex items-center justify-center text-gold-500 shrink-0">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-white">Address / Area</p>
+                                <p class="text-gray-400 text-xs mt-0.5">37 Piet My Vrou Ave, Kuils River, Cape Town, 7580</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full glass-panel-gold flex items-center justify-center text-gold-500 shrink-0">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-white">Direct Phone & WhatsApp</p>
+                                <p class="text-gray-400 text-xs mt-0.5">+27 71 451 2970</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full glass-panel-gold flex items-center justify-center text-gold-500 shrink-0">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-white">Hours</p>
+                                <p class="text-gray-400 text-xs mt-0.5">By Appointment Only</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Google Maps Link Button -->
+                    <a href="https://www.google.com/maps/search/?api=1&query=37+Piet+My+Vrou+Ave%2C+Kuils+River%2C+Cape+Town%2C+7580" target="_blank" class="mt-8 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-gold-400 hover:text-gold-300">
+                        <span>Open in Google Maps</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+
+                <!-- Embedded Google Map -->
+                <div class="rounded-3xl overflow-hidden glass-panel border border-gold-500/20 h-[400px] relative">
+                    <iframe 
+                        title="Nails By Valentina Location Map"
+                        src="https://maps.google.com/maps?q=37%20Piet%20My%20Vrou%20Ave%2C%20Kuils%20River%2C%20Cape%20Town%2C%207580&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0; filter: grayscale(0.8) contrast(1.2) opacity(0.85);" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="border-t border-gold-500/10 py-12 bg-dark-base text-center text-xs text-gray-500">
+            <div class="max-w-7xl mx-auto px-4 flex flex-col items-center gap-4">
+                <span class="font-cinzel text-lg font-bold gold-gradient-text tracking-widest">
+                    NAILS ♥ BY ♥ VALENTINA
+                </span>
+                <p class="tracking-widest uppercase">Certified Nail Tech • Cape Town</p>
+                <p class="text-[10px] text-gray-600 mt-4">&copy; <span id="year"></span> Nails By Valentina. All Rights Reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- iOS Glassmorphic Booking Modal -->
+    <div id="bookingModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+        <!-- Backdrop Blur overlay -->
+        <div class="absolute inset-0 bg-black/75 backdrop-blur-md" onclick="closeBookingModal()"></div>
+
+        <!-- Modal Dialog Box -->
+        <div class="relative w-full max-w-lg glass-modal rounded-3xl p-6 sm:p-8 border border-gold-500/30 shadow-2xl translate-y-4 transition-transform duration-300 id-modal-box">
+            
+            <!-- Close Button -->
+            <button onclick="closeBookingModal()" class="absolute top-5 right-5 text-gray-400 hover:text-white p-2">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <!-- Modal Header -->
+            <div class="text-center mb-6">
+                <span class="text-[10px] font-semibold uppercase tracking-[0.3em] text-gold-500">Instant Booking</span>
+                <h3 class="font-cinzel text-2xl font-bold text-white mt-1">Book Your Appointment</h3>
+                <p class="text-xs text-gray-400 mt-1">Fill in details to open pre-filled WhatsApp chat</p>
+            </div>
+
+            <!-- Form Inputs -->
+            <form id="whatsappForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                
+                <!-- Full Name Input -->
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-gold-300 mb-1">Your Full Name</label>
+                    <input type="text" id="clientName" required placeholder="e.g. Sarah Jenkins" 
+                           class="w-full bg-dark-base/80 border border-gold-500/30 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-gold-500">
+                </div>
+
+                <!-- Service Selection Dropdown -->
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-gold-300 mb-1">Select Service</label>
+                    <select id="serviceSelect" required class="w-full bg-dark-base/80 border border-gold-500/30 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-gold-500">
+                        <option value="Classic Manicure (No Paint) - R400">Classic Manicure (No Paint) - R400</option>
+                        <option value="Manicure (Builder Gel) - R550">Manicure (Builder Gel) - R550</option>
+                        <option value="French Manicure - R650">French Manicure - R650</option>
+                        <option value="Ombre Manicure - R650">Ombre Manicure - R650</option>
+                        <option value="Classic Pedicure (No Paint) - R400">Classic Pedicure (No Paint) - R400</option>
+                        <option value="Mini Pedi (Incl Paint) - R550">Mini Pedi (Incl Paint) - R550</option>
+                        <option value="Full Pedi (Incl Paint) - R650">Full Pedi (Incl Paint) - R650</option>
+                        <option value="Builder Gel / Polymer Ext - R700">Builder Gel / Polymer Ext - R700</option>
+                        <option value="Nail Repair (Per Nail) - R40">Nail Repair (Per Nail) - R40</option>
+                        <option value="Nail Art (Per Nail) - R15">Nail Art (Per Nail) - R15</option>
+                    </select>
+                </div>
+
+                <!-- Date & Time Slot Row -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-gold-300 mb-1">Preferred Date</label>
+                        <input type="date" id="bookingDate" required 
+                               class="w-full bg-dark-base/80 border border-gold-500/30 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-gold-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-gold-300 mb-1">Preferred Time</label>
+                        <select id="bookingTime" required class="w-full bg-dark-base/80 border border-gold-500/30 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-gold-500">
+                            <option value="09:00 AM">09:00 AM</option>
+                            <option value="11:00 AM">11:00 AM</option>
+                            <option value="02:00 PM">02:00 PM</option>
+                            <option value="04:00 PM">04:00 PM</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Submit CTA Button -->
+                <button type="submit" class="w-full btn-gold-glow text-black font-bold text-xs uppercase tracking-widest py-4 rounded-xl mt-6 flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-base"></i>
+                    <span>Confirm & Chat on WhatsApp</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Maintenance Control Toggle (Bottom Left Floating) -->
+    <div class="fixed bottom-4 left-4 z-40 glass-panel border border-gold-500/30 rounded-full px-4 py-2 flex items-center gap-3 text-xs text-gray-300 shadow-xl">
+        <i class="fa-solid fa-gears text-gold-500"></i>
+        <span>Site Mode:</span>
+        <button onclick="toggleMaintenanceMode()" class="text-gold-400 font-semibold underline hover:text-gold-300">
+            <span id="modeStatusLabel">Live</span> (Toggle)
+        </button>
+    </div>
+
+    <!-- Interactive JavaScript -->
+    <script>
+        // Auto Update Footer Year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Set minimum date to today in datepicker
+        const dateInput = document.getElementById('bookingDate');
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.min = today;
+        dateInput.value = today;
+
+        // Mobile Menu Toggle logic
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Maintenance Mode Toggle Logic
+        function toggleMaintenanceMode(forceState = null) {
+            const screen = document.getElementById('maintenanceScreen');
+            const main = document.getElementById('mainSite');
+            const label = document.getElementById('modeStatusLabel');
+
+            const isCurrentlyHidden = screen.classList.contains('hidden');
+            const shouldShow = forceState !== null ? forceState : isCurrentlyHidden;
+
+            if (shouldShow) {
+                screen.classList.remove('hidden');
+                main.classList.add('hidden');
+                label.textContent = 'Maintenance';
+            } else {
+                screen.classList.add('hidden');
+                main.classList.remove('hidden');
+                label.textContent = 'Live';
+            }
+        }
+
+        // Open Booking Modal Function
+        function openBookingModal(serviceName = null) {
+            const modal = document.getElementById('bookingModal');
+            const serviceSelect = document.getElementById('serviceSelect');
+
+            if (serviceName) {
+                serviceSelect.value = serviceName;
+            }
+
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.querySelector('.id-modal-box').classList.remove('translate-y-4');
+        }
+
+        // Close Booking Modal Function
+        function closeBookingModal() {
+            const modal = document.getElementById('bookingModal');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.querySelector('.id-modal-box').classList.add('translate-y-4');
+        }
+
+        // Handle WhatsApp Submission logic
+        function handleFormSubmit(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('clientName').value;
+            const service = document.getElementById('serviceSelect').value;
+            const date = document.getElementById('bookingDate').value;
+            const time = document.getElementById('bookingTime').value;
+
+            // Format message string
+            const rawMessage = `Hi Nails By Valentina! 👋\n\nI would like to book an appointment:\n- *Name:* ${name}\n- *Service:* ${service}\n- *Date:* ${date}\n- *Time Slot:* ${time}\n\nPlease let me know if this slot is available!`;
+
+            // Encode for URL query param
+            const encodedMessage = encodeURIComponent(rawMessage);
+            const whatsappNumber = '27714512970';
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+            // Close modal & redirect to WhatsApp in a new tab
+            closeBookingModal();
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
+```
